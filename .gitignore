@@ -1,0 +1,10 @@
+node_modules/
+bower_components/
+src/template/all.js
+src/main.min.css
+src/main.min.js
+src/index.html
+prod/
+src/prod/
+src/data/
+data/
