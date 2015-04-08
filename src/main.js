@@ -87,7 +87,6 @@ var obj = {
         var rslt,
             deltay;
 
-        y = f(guess);
         //newton loop
         for (exit; exit > 0; exit -= 1) {
             rslt = f(guess);
