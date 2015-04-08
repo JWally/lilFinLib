@@ -79,9 +79,6 @@ var obj = {
 
 
         //paste default: 1e-10, 1e-10, 1e-10, 10
-        var sequencePoints = [
-            [guess, f(guess)]
-        ];
         var lineData, prevGuess, y;
 
         var rslt,
@@ -96,26 +93,25 @@ var obj = {
             y = lineData[1];
             guess = (-rslt * dx) / deltay + guess;
             if ((guess < leftBound - dx) || (guess > rightBound + dx)) {
-                return [false, "Out of Bounds:" + guess, sequencePoints];
+                return [false, "Out of Bounds:" + guess];
             }
-            //add (a,f(a))
-            sequencePoints.push([guess, f(guess)]);
-            if ((Math.abs(guess - prevGuess) < minXdist) && (Math.abs(y) <
-                    minYdist)) {
-                return [true, guess, sequencePoints];
+
+            if ((Math.abs(guess - prevGuess) < minXdist) &&
+                (Math.abs(y) < minYdist)) {
+                return [true, guess];
             }
         }
         //did not meet the required distances
-        return [false, "Did not converge", sequencePoints];
+        return [false, "Did not converge", guess];
     },
     // Welp...Here's our IRR Function
     irr: function (transactions) {
         var that = this;
 
         return that.newton(0,
-            function(x){return that.npv(x, transactions)},
-            -100,
-            100
+            function (x) {
+                return that.npv(x, transactions);
+            }, -100, 100
         );
     }
 };
