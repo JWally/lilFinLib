@@ -24,6 +24,15 @@ module.exports = function (grunt) {
                 "white": true
             }
         },
+        "mochaTest": {
+            "test": {
+                "options": {
+                    "reporter": "spec",
+                    "ui": "tdd"
+                },
+                "src": ["test/**/*.js"]
+            }
+        },
         "jsbeautifier": {
             "default": {
                 src: [
@@ -85,6 +94,9 @@ module.exports = function (grunt) {
 
     grunt.loadNpmTasks("grunt-jsbeautifier");
     grunt.loadNpmTasks("grunt-contrib-jshint");
+    grunt.loadNpmTasks("grunt-mocha-test");
+    grunt.registerTask("test", ["jsbeautifier:default", "jshint", "mochaTest"]);
+
     grunt.registerTask("prod", [
         "jsbeautifier:default",
         "jshint"
